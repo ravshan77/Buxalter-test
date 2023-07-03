@@ -27,11 +27,10 @@ function BarChart03({
 
   useEffect(() => {
 
-    // Calculate sum of values
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    const values = data.datasets.map(x => x.data.reduce(reducer));
-    const max = values.reduce(reducer);
-
+   // Calculate sum of values
+   const reducer = (accumulator, currentValue) => accumulator + currentValue;
+   const values = data.datasets.map(x => x.data.reduce(reducer));
+   const max = values.reduce(reducer);
     const ctx = canvas.current;
     // eslint-disable-next-line no-unused-vars
     const newChart = new Chart(ctx, {
