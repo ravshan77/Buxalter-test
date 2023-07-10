@@ -2,12 +2,14 @@ import React, { memo, useEffect } from "react";
 import { routes } from "../routes/routes";
 import { useDispatch } from "react-redux";
 import { DASHBOARD_PAGE, HOSTINGS_PAGE, HOSTING_PAGE, SITES_PAGE, SITE_PAGE } from "../constants";
-import { Sites, Hostings, Dashboard, Site, Hosting } from "../pages";
+import { Sites, Hostings, Dashboard, Site, Host } from "../pages";
 import { setCurrentTemplate } from "../redux/currentTempalteReducer";
+import { useParams } from "react-router-dom";
 
 
 const PageController = ({ page }) => {
   const dispatch  = useDispatch();
+  const { id } = useParams();
 
   useEffect(() => {
     routes.map(route => {
@@ -19,7 +21,6 @@ const PageController = ({ page }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [window.location.pathname]);
 
-
   switch (page?.type) {
     case DASHBOARD_PAGE:
       return <Dashboard page={page} />;
@@ -30,7 +31,7 @@ const PageController = ({ page }) => {
     case HOSTINGS_PAGE:
       return <Hostings page={page} />;
     case HOSTING_PAGE: 
-    return <Hosting page={page} />;   
+    return <Host page={page} />;   
     default:
       return <>jkdkjd</>;
   }

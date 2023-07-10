@@ -1,14 +1,15 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import LineChart from '../../charts/LineChart01';
-import Icon from '../../images/icon-01.svg';
-import EditMenu from '../../components/DropdownEditMenu';
-
-// Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 import { SITES_PATH } from '../../constants';
+import { useDispatch } from 'react-redux';
+import { setCurrentCardData, setCurrentValues } from '../../redux';
+
 
 export function SiteCard({card}) {
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   const chartData = {
     labels: [
@@ -73,43 +74,28 @@ export function SiteCard({card}) {
     ],
   };
 
+  const redirectCard = (id) => {
+    dispatch(setCurrentCardData({...card}))
+    dispatch(setCurrentValues({...card, }))
+    navigate(`${SITES_PATH}/${card?.id}`)
+  }
+
+
   return (
     <div className="flex flex-col col-span-full sm:col-span-6 xl:col-span-4 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
-      <div className="px-5 pt-5">
-        <header className="flex justify-between items-start mb-2">
-          {/* Icon */}
-          <img src={card?.icon} width="32" height="32" alt="Icon 01" />
-          {/* Menu button */}
-          <EditMenu align="right" className="relative inline-flex">
-            <li>
-              <Link className="font-medium text-sm text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-200 flex py-1 px-3" to="#0">
-                Option 1
-              </Link>
-            </li>
-            <li>
-              <Link className="font-medium text-sm text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-200 flex py-1 px-3" to="#0">
-                Option 2
-              </Link>
-            </li>
-            <li>
-              <Link className="font-medium text-sm text-rose-500 hover:text-rose-600 flex py-1 px-3" to="#0">
-                Remove
-              </Link>
-            </li>
-          </EditMenu>
-        </header>
-        <NavLink to={`${SITES_PATH}/${card?.id}`}>
-            <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-2">{card?.title}</h2>
-        </NavLink>    
-        <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase mb-1">Sales</div>
-        <div className="flex items-start">
-          <div className="text-3xl font-bold text-slate-800 dark:text-slate-100 mr-2">{card?.price}</div>
-          <div className={`text-sm font-semibold text-white px-1.5 ${card?.colorCountClass} rounded-full`}>{card?.count}</div>
+      <div className="px-5 pt-5 cursor-pointer" onClick={redirectCard}>
+            <h2 className="text-3xl font-semibold text-slate-800 dark:text-slate-100 mb-2" style={{fontSize:"24px"}}>{card?.name}</h2>
+        <div className="flex text-xs font-semibold text-slate-400 dark:text-slate-500 mb-1 border-gray-100 border" style={{ alignItems:"center", justifyContent:"space-between"}}>
+          
+          { card?.status === "1" ? <div className='flex' style={{alignItems:"center"}}> Active  <svg className='ml-3' width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g  stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M17 6H7a6 6 0 1 0 0 12h10a6 6 0 0 0 0-12Z" fill="#77e26f" fill-opacity=".16" stroke="#77e26f" stroke-width="1.5" stroke-miterlimit="10"></path><path d="M17 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" fill="#ffffff" stroke="#77e26f" stroke-width="1.5" stroke-miterlimit="10"></path></g></svg> </div>
+          : <div className='flex' style={{alignItems:"center"}}> inactive  <svg className='ml-3' width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#b79f9f"><g  stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M17 6H7a6 6 0 1 0 0 12h10a6 6 0 0 0 0-12Z" fill="#f55656" fill-opacity=".16" stroke="#f55656" stroke-width="1.5" stroke-miterlimit="10"></path><path d="M7 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" fill="#ffffff" stroke="#f55656" stroke-width="1.5" stroke-miterlimit="10"></path></g></svg></div>}
+        
+          <div className="flex items-start">
+            <div className="text-lg font-bold text-slate-800 dark:text-slate-100 mr-2">{card?.date}</div>
+          </div>
         </div>
       </div>
-      {/* Chart built with Chart.js 3 */}
       <div className="grow max-sm:max-h-[128px] xl:max-h-[128px]">
-        {/* Change the height attribute to adjust the chart height */}
         <LineChart data={chartData} width={389} height={128} />
       </div>
     </div>

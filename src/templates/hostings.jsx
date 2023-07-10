@@ -8,7 +8,7 @@ export const hostings = {
   optionUrl: HOSTINGS_URL,
   optionName: "hostings",
   form: {
-    url: HOSTINGS_URL,
+    url: "/host",
     title: "Hosting",
     modal: {
       width: 700,
@@ -19,8 +19,8 @@ export const hostings = {
     },
     inputs: [
       {
-        name: "name",
-        label: "Hosting name",
+        name: "ip",
+        label: "IP Address",
         required: true,
         type: STRING,
         gridColumn: "1 / 9",

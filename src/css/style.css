@@ -8,3 +8,7 @@
 @import 'additional-styles/flatpickr.css';
 
 @import 'tailwindcss/utilities';
+
+.d{
+ color: rgb(129, 128, 128);
+}

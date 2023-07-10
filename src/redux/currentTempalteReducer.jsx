@@ -3,14 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export const currentTempalteReducer = createSlice({
   name: "currentTempalteReducer",
   initialState: {
-    currentTemplate: {},
+    currentTemplate: {}, 
   },
   reducers: {
     setCurrentTemplate: (state, { payload }) => {
       state.currentTemplate = { ...payload };
     },
-    toggleTemplateModal: (state, { payload }) =>{
-      console.log(payload);
+    toggleTemplateModal: (state, { payload }) => {
       state.currentTemplate.isOpenModal = payload
     }
   },

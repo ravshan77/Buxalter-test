@@ -14,19 +14,16 @@ function DashboardCard07() {
             <thead className="text-xs uppercase text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-700 dark:bg-opacity-50 rounded-sm">
               <tr>
                 <th className="p-2">
-                  <div className="font-semibold text-left">Source</div>
+                  <div className="font-semibold text-left">From</div>
                 </th>
                 <th className="p-2">
-                  <div className="font-semibold text-center">Visitors</div>
+                  <div className="font-semibold text-center">Time</div>
                 </th>
                 <th className="p-2">
-                  <div className="font-semibold text-center">Revenues</div>
+                  <div className="font-semibold text-center">Status</div>
                 </th>
                 <th className="p-2">
-                  <div className="font-semibold text-center">Sales</div>
-                </th>
-                <th className="p-2">
-                  <div className="font-semibold text-center">Conversion</div>
+                  <div className="font-semibold text-center">Screenshot</div>
                 </th>
               </tr>
             </thead>
@@ -47,16 +44,13 @@ function DashboardCard07() {
                   </div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center">2.4K</div>
+                  <div className="text-center">108 month</div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center text-emerald-500">$3,877</div>
+                  <div className="text-center text-emerald-500">Active ✔</div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center">267</div>
-                </td>
-                <td className="p-2">
-                  <div className="text-center text-sky-500">4.7%</div>
+                  <div className="text-center text-sky-500">...</div>
                 </td>
               </tr>
               {/* Row */}
@@ -75,16 +69,13 @@ function DashboardCard07() {
                   </div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center">2.2K</div>
+                  <div className="text-center">48 month</div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center text-emerald-500">$3,426</div>
+                  <div className="text-center text-emerald-500">Active ✔</div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center">249</div>
-                </td>
-                <td className="p-2">
-                  <div className="text-center text-sky-500">4.4%</div>
+                  <div className="text-center text-sky-500">...</div>
                 </td>
               </tr>
               {/* Row */}
@@ -103,16 +94,13 @@ function DashboardCard07() {
                   </div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center">2.0K</div>
+                  <div className="text-center">120 month</div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center text-emerald-500">$2,444</div>
+                  <div className="text-center text-emerald-500">Active ✔</div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center">224</div>
-                </td>
-                <td className="p-2">
-                  <div className="text-center text-sky-500">4.2%</div>
+                  <div className="text-center text-sky-500">...</div>
                 </td>
               </tr>
               {/* Row */}
@@ -131,16 +119,13 @@ function DashboardCard07() {
                   </div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center">1.9K</div>
+                  <div className="text-center">12 month</div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center text-emerald-500">$2,236</div>
+                  <div className="text-center text-red-500">inactive ✖</div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center">220</div>
-                </td>
-                <td className="p-2">
-                  <div className="text-center text-sky-500">4.2%</div>
+                  <div className="text-center text-sky-500">...</div>
                 </td>
               </tr>
               {/* Row */}
@@ -158,16 +143,13 @@ function DashboardCard07() {
                   </div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center">1.7K</div>
+                  <div className="text-center">18 month</div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center text-emerald-500">$2,034</div>
+                  <div className="text-center text-red-500">inactive ✖</div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center">204</div>
-                </td>
-                <td className="p-2">
-                  <div className="text-center text-sky-500">3.9%</div>
+                  <div className="text-center text-sky-500">...</div>
                 </td>
               </tr>
             </tbody>

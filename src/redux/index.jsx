@@ -1,5 +1,5 @@
 export { setCurrentTemplate, toggleTemplateModal } from "./currentTempalteReducer";
 
-export { setCurrentValues } from "./currentValuesReducer";
+export { setCurrentValues, setCurrentCardData } from "./currentValuesReducer";
 
-export { setTablesData, setAllOptionsData } from "./rootDataReducer";
+export { setTablesData, setAllOptionsData, setIsGetter } from "./rootDataReducer";

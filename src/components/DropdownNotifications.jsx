@@ -2,14 +2,16 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Transition from '../utils/Transition';
 
-function DropdownNotifications({
-  align
-}) {
-
+function DropdownNotifications({ align }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
   const trigger = useRef(null);
   const dropdown = useRef(null);
+
+  let today = new Date();
+  let dd = String(today.getDate()).padStart(2, '0');
+  let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  let yyyy = today.getFullYear();
+
 
   // close on click outside
   useEffect(() => {
@@ -34,13 +36,7 @@ function DropdownNotifications({
 
   return (
     <div className="relative inline-flex">
-      <button
-        ref={trigger}
-        className={`w-8 h-8 flex items-center justify-center bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600/80 rounded-full ${dropdownOpen && 'bg-slate-200'}`}
-        aria-haspopup="true"
-        onClick={() => setDropdownOpen(!dropdownOpen)}
-        aria-expanded={dropdownOpen}
-      >
+      <button ref={trigger} className={`w-8 h-8 flex items-center justify-center bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600/80 rounded-full ${dropdownOpen && 'bg-slate-200'}`} aria-haspopup="true" onClick={() => setDropdownOpen(!dropdownOpen)} aria-expanded={dropdownOpen} >
         <span className="sr-only">Notifications</span>
         <svg className="w-4 h-4" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
           <path className="fill-current text-slate-500 dark:text-slate-400" d="M6.5 0C2.91 0 0 2.462 0 5.5c0 1.075.37 2.074 1 2.922V12l2.699-1.542A7.454 7.454 0 006.5 11c3.59 0 6.5-2.462 6.5-5.5S10.09 0 6.5 0z" />
@@ -59,41 +55,13 @@ function DropdownNotifications({
         leaveStart="opacity-100"
         leaveEnd="opacity-0"
       >
-        <div
-          ref={dropdown}
-          onFocus={() => setDropdownOpen(true)}
-          onBlur={() => setDropdownOpen(false)}
-        >
+        <div ref={dropdown} onFocus={() => setDropdownOpen(true)} onBlur={() => setDropdownOpen(false)} >
           <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase pt-1.5 pb-2 px-4">Notifications</div>
           <ul>
             <li className="border-b border-slate-200 dark:border-slate-700 last:border-0">
-              <Link
-                className="block py-2 px-4 hover:bg-slate-50 dark:hover:bg-slate-700/20"
-                to="#0"
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-              >
-                <span className="block text-sm mb-2">📣 <span className="font-medium text-slate-800 dark:text-slate-100">Edit your information in a swipe</span> Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.</span>
-                <span className="block text-xs font-medium text-slate-400 dark:text-slate-500">Feb 12, 2021</span>
-              </Link>
-            </li>
-            <li className="border-b border-slate-200 dark:border-slate-700 last:border-0">
-              <Link
-                className="block py-2 px-4 hover:bg-slate-50 dark:hover:bg-slate-700/20"
-                to="#0"
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-              >
-                <span className="block text-sm mb-2">📣 <span className="font-medium text-slate-800 dark:text-slate-100">Edit your information in a swipe</span> Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.</span>
-                <span className="block text-xs font-medium text-slate-400 dark:text-slate-500">Feb 9, 2021</span>
-              </Link>
-            </li>
-            <li className="border-b border-slate-200 dark:border-slate-700 last:border-0">
-              <Link
-                className="block py-2 px-4 hover:bg-slate-50 dark:hover:bg-slate-700/20"
-                to="#0"
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-              >
-                <span className="block text-sm mb-2">🚀<span className="font-medium text-slate-800 dark:text-slate-100">Say goodbye to paper receipts!</span> Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.</span>
-                <span className="block text-xs font-medium text-slate-400 dark:text-slate-500">Jan 24, 2020</span>
+              <Link className="block py-2 px-4 hover:bg-slate-50 dark:hover:bg-slate-700/20" to="#0" onClick={() => setDropdownOpen(!dropdownOpen)} >
+                <span className="block text-sm mb-2">📣 <span className="font-medium text-slate-800 dark:text-slate-100">There are no messages yet.</span></span>
+                <p className="block text-xs font-medium text-slate-400 dark:text-slate-500 text-right">{ mm + '/' + dd + '/' + yyyy}</p>
               </Link>
             </li>
           </ul>

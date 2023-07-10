@@ -41,11 +41,11 @@ function RealtimeChart({
             border: {
               display: false,
             },
-            suggestedMin: 30,
-            suggestedMax: 80,
+            suggestedMin: 0,
+            suggestedMax: 100,
             ticks: {
               maxTicksLimit: 5,
-              callback: (value) => formatValue(value),
+              // callback: (value) => formatValue(value),
               color: darkMode ? textColor.dark : textColor.light,
             },
             grid: {
@@ -116,7 +116,7 @@ function RealtimeChart({
     } else {
       chartDeviation.current.style.backgroundColor = tailwindConfig().theme.colors.emerald[500];
     }
-    chartDeviation.current.innerHTML = `${diff > 0 ? '+' : ''}${diff.toFixed(2)}%`;
+    chartDeviation.current.innerHTML = `${diff > 0 ? '+' : ''}Mbps`;
   }, [data]);
 
   useEffect(() => {
@@ -147,7 +147,7 @@ function RealtimeChart({
     <React.Fragment>
       <div className="px-5 py-3">
         <div className="flex items-start">
-          <div className="text-3xl font-bold text-slate-800 dark:text-slate-100 mr-2 tabular-nums">$<span ref={chartValue}>57.81</span></div>
+          <div className="text-3xl font-bold text-slate-800 dark:text-slate-100 mr-2 tabular-nums">  <span ref={chartValue}>57.81</span></div>
           <div ref={chartDeviation} className="text-sm font-semibold text-white px-1.5 rounded-full"></div>
         </div>
       </div>

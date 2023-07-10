@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import InformationModalBody from './Modal/InformationModalBody'
 import { INFORMATIONS_MODAL } from '../constants'
 import { useSelector } from 'react-redux';
-import useFunctions from '../functions/functions';
+import useFunctions from '../hooks/functions';
 
 export default function Modal() {
   const {handleCloseModal} = useFunctions()
@@ -13,6 +13,8 @@ export default function Modal() {
   
  
   let modalBody = null;
+
+  console.log(form);
 
   switch (form?.modal?.modalType) {
     case INFORMATIONS_MODAL:

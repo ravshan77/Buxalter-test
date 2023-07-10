@@ -9,8 +9,8 @@ const useFunctions = () => {
 
   
   const handleOpenModal = () => {
-    console.log("sdfsdfds");
-    dispatch(toggleTemplateModal(true))}
+    dispatch(toggleTemplateModal(true))
+  }
 
   const handleCloseModal = () => {
     dispatch(setCurrentValues({}))

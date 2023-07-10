@@ -8,19 +8,21 @@ import Loading from "./components/Loading"
 import { Provider } from "react-redux";
 import { PersistGate } from "reduxjs-toolkit-persist/integration/react";
 import { persistStore } from "redux-persist";
-
+import { ReactNotifications } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 const persistor = persistStore(store);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <PersistGate  loading={<Loading />} persistor={persistor}>
         <Router>
           <ThemeProvider>
             <App />
+            <ReactNotifications />
           </ThemeProvider>
         </Router>
       </PersistGate>  
     </Provider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );

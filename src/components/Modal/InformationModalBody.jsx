@@ -1,25 +1,35 @@
 import { Dialog } from "@headlessui/react";
-import React from "react";
+import React, { useState } from "react";
 import InformationModalFooter from "./InformationModalFooter";
-import Inputs from "./inputs";
 import ModalInputs from './ModalInputs'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { POST } from "../../server/method";
+import message from "../../utils/message";
+import { setCurrentCardData, setCurrentValues, setIsGetter, toggleTemplateModal } from "../../redux";
+import { CARDS_DATA } from "../../constants";
 
 
 const InformationModalBody = ({ cancelButtonRef, form}) => {
   const { currentValues } = useSelector((state) => state.currentValuesReducer)
+  const { currentTemplate } = useSelector((state) => state.currentTempalteReducer)
+  const [saveLoading, setSaveLoading] = useState(false)
+  const dispatch = useDispatch()
 
-  const onSubmit = (e) => {
+
+  const onSubmit = async (e) => {
     e.preventDefault();
+    setSaveLoading(true)
+   await POST(currentTemplate?.form?.url, {...currentValues}).then(res => {
+    dispatch(setIsGetter({ key:CARDS_DATA}))
+    message({type:"info", msg:"Saved data", title:"Success"})
+    dispatch(setCurrentValues({...res.data.data}))
+    dispatch(setCurrentCardData({...res.data.data}))
+    // handleCloseModal()
+    dispatch(toggleTemplateModal(false))
+  }).catch(err => message({type:"danger", msg: err.response.data.error, title:"Xatolik"})).finally(() => {
+    setSaveLoading(false)
+  })
 
-    var content = confirm(currentValues?.name); // The "hello" means to show the following text
-    if (content === true) {
-      // Do whatever if the user clicked ok.
-      alert("Save")
-    } else {
-      // Do whatever if the user clicks cancel.
-      alert("Cancel")
-    }
   }
 
   return (
@@ -32,7 +42,7 @@ const InformationModalBody = ({ cancelButtonRef, form}) => {
                 { currentValues?.id ? ("Edit " + form?.title) : ("Create a " + form?.title)}
               </Dialog.Title>
               <div className="mt-2">
-                <div style={{ gridTemplateColumns: form?.gridTemplates?.columns, gridTemplateRows: form?.gridTemplates?.rows, display:"grid" }}>
+                <div style={{ gridTemplateColumns: form?.gridTemplates?.columns, gridTemplateRows: form?.gridTemplates?.rows, display:"grid", gridColumnGap:"20px" }}>
                     {form?.inputs?.map((input, i) =>
                             <div className="mb-3" style={{ gridColumn: input?.gridColumn, gridRow: input?.gridRow }} key={i + "input_wrap"}>
                                 {/* {input?.label ? <label htmlFor={input?.name} >{input?.label + " * "} </label> : null} */}
@@ -47,22 +57,10 @@ const InformationModalBody = ({ cancelButtonRef, form}) => {
             </div>
           </div>
         </div>
-        <InformationModalFooter cancelButtonRef={cancelButtonRef} />
+        <InformationModalFooter saveLoading={saveLoading} cancelButtonRef={cancelButtonRef} />
       </form>
     </>
   );
 };
 
 export default InformationModalBody;
-
-
-{/* <form style={{ width: "auto", height: "auto" }}>
-    <div className="form" style={{ gridTemplateColumns: form?.gridTemplates?.columns, gridTemplateRows: form?.gridTemplates?.rows }}>
-        {form?.inputs?.map((input, i) =>
-                <div className="form-item" style={{ gridColumn: input?.gridColumn, gridRow: input?.gridRow, }} key={i + "input_wrap"}>
-                    {input?.label ? <label htmlFor={input?.name} >{input?.label + " * "} </label> : null}
-                    <ModalInput {...input} values={currentValues} />
-                </div>
-        )}
-    </div>
-</form> */}

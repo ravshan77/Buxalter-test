@@ -1,96 +1,65 @@
-import React from "react";
-import FilterButton from "../../components/DropdownFilter";
-import Datepicker from "../../components/Datepicker";
-import DashboardAvatars from "../../partials/dashboard/DashboardAvatars";
-import useFunctions from "../../functions/functions";
+import React, { useEffect, useState } from "react";
+import useFunctions from "../../hooks/functions";
 import { SiteCard } from "./SiteCard";
-import Icon1 from '../../images/icon-01.svg';
-import Icon2 from '../../images/icon-02.svg';
-import Icon3 from '../../images/icon-03.svg';
-
- 
-export const cards = [
-  {
-    id:1,
-    title:"Ketmon.uz",
-    price:"$24,780",
-    count:"+49%",
-    icon: Icon1,
-    colorCountClass:"bg-emerald-500",
-  },
-  {
-    id:2,
-    title:"Paloncha.com",
-    price:"$17,489",
-    count:"28%",
-    icon: Icon2,
-    colorCountClass:"bg-amber-500",
-  },
-  {
-    id:3,
-    title:"Qo'chqor.net",
-    price:"$9,962",
-    count:"-14%",
-    icon:Icon3,
-    colorCountClass:"bg-amber-500",
-  },
-  {
-    id:4,
-    title:"Paloncha.com",
-    price:"$17,489",
-    count:"28%",
-    icon: Icon2,
-    colorCountClass:"bg-amber-500",
-  },
-  {
-    id:5,
-    title:"Qo'chqor.net",
-    price:"$9,962",
-    count:"-14%",
-    icon:Icon3,
-    colorCountClass:"bg-amber-500",
-  },
-  {
-    id:6,
-    title:"Paloncha.com",
-    price:"$17,489",
-    count:"28%",
-    icon: Icon2,
-    colorCountClass:"bg-amber-500",
-  },
-  {
-    id:7,
-    title:"Qo'chqor.net",
-    price:"$9,962",
-    count:"-14%",
-    icon:Icon3,
-    colorCountClass:"bg-amber-500",
-  },
-]
+import SearchInputPage from "../../components/SearchInputPage";
+import { setTablesData } from "../../redux";
+import { useDispatch, useSelector } from "react-redux";
+import { POST } from "../../server/method";
+import LoadingCard from "../../components/Loading/loadingCard";
+import EmptyContent from "../../components/EmptyContent/EmptyContent";
+import { CARDS_DATA } from "../../constants";
 
 
 export const Sites = ({page}) => {
   const { handleOpenModal } = useFunctions()
+  const dispatch = useDispatch()
+  const [searchInputValue, setSearchInputValue] = useState({site_name:""});
+  const [loading, setLoading] = useState(false);
+  const { tableData, isGetter } = useSelector((state) => state.rootDataReducer)
+ 
+  const fetchRecords = async ({index, payload})  => {
+    setLoading(true);    
+    await POST(`/site/search?page=${index}`, payload).then((res) => {
+        if (res.status === 200) {
+          // setMeta(res.data.meta);
+          dispatch(setTablesData({ key: CARDS_DATA, data: res?.data.data }));
+        }
+      }).catch((err) => message({type:"danger", msg:err.response.data.data, title:"Xatolik"})).finally(() => setLoading(false));
+    };
 
+
+    const handleFilter = (e) => {
+      const value = e.target.value;
+      const name = e.target.name;
+      setSearchInputValue({...searchInputValue, [name]:value});
+      fetchRecords({index:1 ,payload:{...searchInputValue, [name]:value}})    
+    };
+    
+  useEffect(() => {
+    setSearchInputValue({...searchInputValue,})
+    fetchRecords({index:1, payload:{...searchInputValue}})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ isGetter[CARDS_DATA] ]);
+  
+  const card_data = tableData[CARDS_DATA] ?? []
+
+  
   return (
     <div>
       <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
         <div className="sm:flex sm:justify-between sm:items-center mb-8">
           {/* Left: Avatars */}
-          <DashboardAvatars />
+          <SearchInputPage onSearch={handleFilter} searchInputName={"site_name"} searchInputValue={searchInputValue} />
+          <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
 
           {/* Right: Actions */}
-          <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
             {/* Filter button */}
-            <FilterButton />
+            {/* <FilterButton /> */}
             {/* Datepicker built with flatpickr */}
-            <Datepicker />
+            {/* <Datepicker /> */}
             {/* Add view button */}
             <button onClick={handleOpenModal} className="btn bg-indigo-500 hover:bg-indigo-600 text-white">
-              <svg
-                className="w-4 h-4 fill-current opacity-50 shrink-0"
-                viewBox="0 0 16 16"
-              >
+              <svg className="w-4 h-4 fill-current opacity-50 shrink-0" viewBox="0 0 16 16" >
                 <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
               </svg>
               <span className="hidden xs:block ml-2">Add view</span>
@@ -99,9 +68,9 @@ export const Sites = ({page}) => {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-12 gap-6">
-        { cards?.map(card => <SiteCard card={card} />) }
-        </div>
+        { card_data?.length === 0 ? <EmptyContent /> : <div className="grid grid-cols-12 gap-6">
+          { loading ? <LoadingCard/> : card_data?.map(card => <SiteCard card={card} />) }
+        </div>}
       </div>
     </div>
   );

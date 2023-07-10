@@ -1,9 +1,9 @@
 import React from "react";
 import FilterButton from "../../components/DropdownFilter";
 import Datepicker from "../../components/Datepicker";
-import DashboardAvatars from "../../partials/dashboard/DashboardAvatars";
 import DashboardCard10 from "./HostingCard";
-import useFunctions from "../../functions/functions";
+import useFunctions from "../../hooks/functions";
+import SearchInputPage from "../../components/SearchInputPage";
 
 export const Hostings = ({page}) => {
   const { handleOpenModal } = useFunctions()
@@ -14,7 +14,7 @@ export const Hostings = ({page}) => {
       <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
         <div className="sm:flex sm:justify-between sm:items-center mb-8">
           {/* Left: Avatars */}
-          <DashboardAvatars />
+          <SearchInputPage />
 
           {/* Right: Actions */}
           <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">

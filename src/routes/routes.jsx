@@ -1,9 +1,10 @@
-import { sites, dashboard, hostings, site, hosting } from "../templates";
+import { sites, dashboard, hostings, site, hosting, login } from "../templates";
 
  const informationTemplates = [ sites, dashboard, hostings, site, hosting];
 
 
 const routes = [
+  login,
   ...informationTemplates,
 ];
 

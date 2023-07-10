@@ -1,5 +1,6 @@
 {/* PATH */}
 export const DASHBOARD_PATH = "/"; //! This path is accepted if there is a user
+export const LOGIN_PATH = "/dashboard"; //! This path is accepted if there is a user
 export const SITES_PATH = "/sites";
 export const HOSTINGS_PATH = "/hostings";
 export const SITE_PATH = `${SITES_PATH}/:id`
@@ -15,7 +16,7 @@ export const LOGIN_PAGE = "LOGIN_PAGE";
 
 {/* URL */}
 export const LOGIN_URL = import.meta.env.VITE_LOGIN_URL
-export const SITES_URL = import.meta.env.VITE_SITES_URL
+export const SITES_URL = "/site"
 export const HOSTINGS_URL = import.meta.env.VITE_HOSTINGS_URL
 
 {/* MODALS */}
@@ -37,4 +38,5 @@ export const BASE_PAGE_DATE = "BASE_PAGE_DATE";
 
 {/* DATE FORMAT */}
 export const DATE_FORMAT = "YYYY-MM-DD";
-
+// Global state isGetter 
+export const CARDS_DATA = "CARDS_DATA";
