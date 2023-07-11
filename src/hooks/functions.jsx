@@ -1,10 +1,8 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setCurrentValues, toggleTemplateModal } from '../redux'
 
 
 const useFunctions = () => {
-//   const currentTemplate = useSelector((state) => state.currentTempalteReducer.currentTemplate)
   const dispatch = useDispatch()
 
   

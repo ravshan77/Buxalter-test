@@ -4,9 +4,9 @@ import InformationModalFooter from "./InformationModalFooter";
 import ModalInputs from './ModalInputs'
 import { useDispatch, useSelector } from 'react-redux';
 import { POST } from "../../server/method";
-import message from "../../utils/message";
 import { setCurrentCardData, setCurrentValues, setIsGetter, toggleTemplateModal } from "../../redux";
 import { CARDS_DATA } from "../../constants";
+import { toast } from 'react-toastify'
 
 
 const InformationModalBody = ({ cancelButtonRef, form}) => {
@@ -21,12 +21,11 @@ const InformationModalBody = ({ cancelButtonRef, form}) => {
     setSaveLoading(true)
    await POST(currentTemplate?.form?.url, {...currentValues}).then(res => {
     dispatch(setIsGetter({ key:CARDS_DATA}))
-    message({type:"info", msg:"Saved data", title:"Success"})
+    toast.success('Success!', { position: toast.POSITION.TOP_RIGHT, autoClose: 4000 })
     dispatch(setCurrentValues({...res.data.data}))
     dispatch(setCurrentCardData({...res.data.data}))
-    // handleCloseModal()
     dispatch(toggleTemplateModal(false))
-  }).catch(err => message({type:"danger", msg: err.response.data.error, title:"Xatolik"})).finally(() => {
+  }).catch(err => toast.error(`Error! ${err.response.data.error}`, { position: toast.POSITION.TOP_RIGHT })).finally(() => {
     setSaveLoading(false)
   })
 

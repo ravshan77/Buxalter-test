@@ -15,10 +15,15 @@ export const HOSTINGS_PAGE = "HOSTINGS_PAGE";
 export const LOGIN_PAGE = "LOGIN_PAGE";
 
 {/* URL */}
-export const LOGIN_URL = import.meta.env.VITE_LOGIN_URL
 export const SITES_URL = "/site"
-export const HOSTINGS_URL = import.meta.env.VITE_HOSTINGS_URL
-
+export const HOSTINGS_URL = "/host"
+export const baseUrl = "http://10.100.104.110:9002/api"
+export const SITE_DELETE_URL = "/site/delete";
+export const SITES_SEARCH_URL = "/site/search?page="
+export const HOSTINGS_DELETE_URL = "/host/delete"
+export const HOSTINGS_SEARCH_URL = "/host/search?page="
+export const REGESTER_URL = "/auth/register"
+export const LOGIN_URL = "/auth/login"
 {/* MODALS */}
 export const INFORMATIONS_MODAL = "INFORMATIONS_MODAL";
 

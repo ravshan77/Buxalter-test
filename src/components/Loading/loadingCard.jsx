@@ -12,6 +12,7 @@ const LoadingCard = () => {
               <div class="h-2 bg-slate-200 rounded col-span-2"></div>
               <div class="h-2 bg-slate-200 rounded col-span-1"></div>
             </div>
+            Loading...
             <div class="h-2 bg-slate-200 rounded"></div>
           </div>
         </div>

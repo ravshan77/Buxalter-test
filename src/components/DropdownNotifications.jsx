@@ -61,7 +61,7 @@ function DropdownNotifications({ align }) {
             <li className="border-b border-slate-200 dark:border-slate-700 last:border-0">
               <Link className="block py-2 px-4 hover:bg-slate-50 dark:hover:bg-slate-700/20" to="#0" onClick={() => setDropdownOpen(!dropdownOpen)} >
                 <span className="block text-sm mb-2">📣 <span className="font-medium text-slate-800 dark:text-slate-100">There are no messages yet.</span></span>
-                <p className="block text-xs font-medium text-slate-400 dark:text-slate-500 text-right">{ mm + '/' + dd + '/' + yyyy}</p>
+                <p className="block text-xs font-medium text-slate-400 dark:text-slate-500 text-right">{ dd + '.' + mm + '.' + yyyy}</p>
               </Link>
             </li>
           </ul>

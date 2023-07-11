@@ -1,10 +1,12 @@
 import React from "react";
-import { Link, useRouteError } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux';
 
 export function NotFoundPage() {
-  // const error = useRouteError();
-  // console.log(error);
+  const dispatch = useDispatch()
+  const handleGoBack = () => dispatch(setCurrentValues({}))
 
+  
   return (
     <>
       <div className="flex items-center justify-center h-screen">
@@ -23,10 +25,7 @@ export function NotFoundPage() {
               The page you’re looking for doesn’t exist.
             </p>
 
-            <Link
-              to="/"
-              className="px-5 py-2 rounded-md text-blue-100 bg-blue-600 hover:bg-blue-700"
-            >
+            <Link onClick={handleGoBack} to="/" className="px-5 py-2 rounded-md text-blue-100 bg-blue-600 hover:bg-blue-700">
               Go home
             </Link>
           </div>

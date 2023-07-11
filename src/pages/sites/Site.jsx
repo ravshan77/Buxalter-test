@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import DashboardCard05 from "../../partials/dashboard/DashboardCard05";
 import { useNavigate } from "react-router-dom";
-import { SITES_PATH } from "../../constants";
+import { SITES_PATH, SITE_DELETE_URL } from "../../constants";
 import { useDispatch, useSelector } from 'react-redux';
 import DashboardCard07 from "../../partials/dashboard/DashboardCard07";
 import useFunctions from "../../hooks/functions";
 import { DELETE } from "../../server/method";
-import message from "../../utils/message";
 import { setCurrentCardData, setCurrentValues } from "../../redux";
+import { toast } from 'react-toastify'
 
 
-export const Site = ({ page }) => {
+export const Site = ({ }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
-  const redirectCard = () => navigate(SITES_PATH);
+  const redirectCard = () => {
+    navigate(SITES_PATH);
+    dispatch(setCurrentValues({}))
+  }
   const { handleOpenModal } = useFunctions()
   const { currentValues, currentCardData } = useSelector((state) => state.currentValuesReducer)
   const [loading, setloading] = useState(false)
@@ -26,16 +29,15 @@ export const Site = ({ page }) => {
       e.stopPropagation();
          if(window.confirm('Are you sure you want to delete this site?')) {
            setloading(true)
-            await DELETE(`/site/delete/${currentValues?.id}`).then(res => {
+            await DELETE(`${SITE_DELETE_URL}/${currentValues?.id}`).then(res => {
               if(res.status){
-                message({type:"info", msg:"Deletion successful", title:"Success"})
-                dispatch(setCurrentValues({}))
+                toast.success('Deletion successful', { position: toast.POSITION.TOP_RIGHT, autoClose: 4000 })
                 dispatch(setCurrentCardData({}))
                 redirectCard()
               }
-            }).catch(err => message({type:"danger", msg: err.response.data.error, title:"Xatolik"})).finally(() => setloading(false))
+            }).catch(err => toast.error(`Error! ${err.response.data.error}`, { position: toast.POSITION.TOP_RIGHT })).finally(() => setloading(false))
          } else {
-           message({type:"danger", msg:"Error deleting! Please try again.", title:"Error"})
+           toast.error(`Error deleting! Please try again.`, { position: toast.POSITION.TOP_RIGHT })
          }
   }
 

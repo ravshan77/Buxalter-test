@@ -1,9 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-const token = "5|pPoMkSuhX2E48ek2av465ArANCYjcq7m1IiFSghr" 
+import { baseUrl } from '../constants';
+
+const token = JSON.parse(sessionStorage.getItem("user"))?.token;
+
 export const jsonServerApi = createApi({
   reducerPath: 'jsonServerApi',
   baseQuery: fetchBaseQuery({ 
-    baseUrl: 'http://10.100.104.110:9002/api/',
+    baseUrl: baseUrl,
     prepareHeaders: (headers) => {
         headers.set("Content-type", 'application/json');
         headers.set("Authorization", `Bearer ${token}`);
@@ -14,13 +17,11 @@ export const jsonServerApi = createApi({
   endpoints: (builder) => ({
 
     getData: builder.query({ query: ({url, page}) => {
-      console.log(url);
       return url
     } }),
 
     posterGetData: builder.query({
         query: ({url, page, data}) => {
-          console.log(url);
          return ({ url: url, method: 'POST', body: data  })},
         // invalidatesTags: ['Albums'],
     }),

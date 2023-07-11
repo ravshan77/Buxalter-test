@@ -5,13 +5,13 @@ import { HostingCard } from "./HostingCard";
 import { useDispatch, useSelector } from "react-redux";
 import { POST } from "../../server/method";
 import { setTablesData } from "../../redux";
-import message from "../../utils/message";
 import LoadingCard from "../../components/Loading/loadingCard";
 import EmptyContent from "../../components/EmptyContent/EmptyContent";
-import { CARDS_DATA } from "../../constants";
+import { CARDS_DATA, HOSTINGS_SEARCH_URL } from "../../constants";
+import { toast } from 'react-toastify'
 
 
-export const Hostings = ({page}) => {
+export const Hostings = ({}) => {
   const { handleOpenModal } = useFunctions()
   const dispatch = useDispatch()
   const [searchInputValue, setSearchInputValue] = useState({host_name:""});
@@ -20,11 +20,11 @@ export const Hostings = ({page}) => {
  
   const fetchRecords = async ({index, payload})  => {
     setLoading(true);    
-    await POST(`/host/search?page=${index}`, payload).then((res) => {
+    await POST(`${HOSTINGS_SEARCH_URL+index}`, payload).then((res) => {
         if (res.status === 200) {
           dispatch(setTablesData({ key: CARDS_DATA, data: res?.data.data }));
         }
-      }).catch((err) => message({type:"danger", msg: err.response.data.data, title:"Xatolik"})).finally(() => setLoading(false));
+      }).catch((err) => toast.error(`Error! ${err.response.data.error}`, { position: toast.POSITION.TOP_RIGHT })).finally(() => setLoading(false));
     };
 
 

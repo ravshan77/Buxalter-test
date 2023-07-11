@@ -1,19 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { DASHBOARD_PATH, HOSTINGS_PATH, SITES_PATH } from '../constants';
+import { useLogOut } from '../hooks/useAuth';
 
 import SidebarLinkGroup from './SidebarLinkGroup';
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const location = useLocation();
   const { pathname } = location;
-
   const trigger = useRef(null);
   const sidebar = useRef(null);
-
+  
   const storedSidebarExpanded = localStorage.getItem('sidebar-expanded');
   const [sidebarExpanded, setSidebarExpanded] = useState(storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true');
-
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }) => {
@@ -79,6 +78,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
               <path d="M2.223 24.14L29.777 7.86A15.926 15.926 0 0132 16c0 8.837-7.163 16-16 16-5.864 0-10.991-3.154-13.777-7.86z" fill="url(#logo-b)" />
             </svg>
           </NavLink>
+          {sidebarExpanded ? <h1 className='font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200 text-white'>Falcon</h1> : null}
         </div>
 
         {/* Links */}
@@ -170,11 +170,11 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
                           <li className="mb-1 last:mb-0">
-                            <NavLink end to="/settings/account" className={({ isActive }) => 'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')} >
+                            <button onClick={useLogOut} type='button' className={'block transition duration-150 truncate  text-slate-400 hover:text-slate-200'} >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                My Account
+                                Sigin Out
                               </span>
-                            </NavLink>
+                            </button>
                           </li>
                           {/* <li className="mb-1 last:mb-0">
                             <NavLink end to="/settings/notifications" className={({ isActive }) => 'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200') } >

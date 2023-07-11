@@ -8,9 +8,10 @@ import Loading from "./components/Loading"
 import { Provider } from "react-redux";
 import { PersistGate } from "reduxjs-toolkit-persist/integration/react";
 import { persistStore } from "redux-persist";
-import { ReactNotifications } from 'react-notifications-component';
-import 'react-notifications-component/dist/theme.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const persistor = persistStore(store);
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
@@ -19,7 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Router>
           <ThemeProvider>
             <App />
-            <ReactNotifications />
+            <ToastContainer />
           </ThemeProvider>
         </Router>
       </PersistGate>  

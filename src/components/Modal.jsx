@@ -8,13 +8,8 @@ import useFunctions from '../hooks/functions';
 export default function Modal() {
   const {handleCloseModal} = useFunctions()
   const { form, isOpenModal } = useSelector((state) => state.currentTempalteReducer.currentTemplate)
-
   const cancelButtonRef = useRef(null)
-  
- 
   let modalBody = null;
-
-  console.log(form);
 
   switch (form?.modal?.modalType) {
     case INFORMATIONS_MODAL:
@@ -22,7 +17,8 @@ export default function Modal() {
       break
     default: 
       break;
- }   
+  }   
+
 
   return (
     <Transition.Root show={isOpenModal || false} as={Fragment}>

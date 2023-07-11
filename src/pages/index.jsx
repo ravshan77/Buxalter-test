@@ -1,10 +1,7 @@
 export {Dashboard} from "./Dashboard"
 export {Sites} from "./sites/Sites"
 export {Site} from "./sites/Site"
-export {Login} from "./login/login"
+export {LoginLayout} from "./login/LoginLayout"
 export {NotFoundPage} from "./NotFoundPage/NotFoundPage"
-// export {Hostings} from "./hosting/Hostings"
-// export {Hosting} from "./hosting/Hosting"
-
 export {Hostings} from "./hostings/Hostings"
 export {Host} from "./hostings/Host"

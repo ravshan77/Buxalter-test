@@ -1,18 +1,21 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import { HOSTINGS_PATH } from "../../constants";
+import { HOSTINGS_DELETE_URL, HOSTINGS_PATH } from "../../constants";
 import HostingTable from './HostingTable';
 import { useDispatch, useSelector } from 'react-redux';
 import useFunctions from '../../hooks/functions';
 import { DELETE } from '../../server/method';
-import message from '../../utils/message';
 import { setCurrentCardData, setCurrentValues } from '../../redux';
+import { toast } from 'react-toastify'
 
 
-export const Host = ({page}) => {
+export const Host = ({}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
-  const redirectCard = () => navigate(HOSTINGS_PATH)
+  const redirectCard = () => {
+    navigate(HOSTINGS_PATH)
+    dispatch(setCurrentValues({}))
+  }
   const { handleOpenModal } = useFunctions()
   const { currentValues, currentCardData } = useSelector((state) => state.currentValuesReducer)
   const [loading, setloading] = useState(false)
@@ -25,16 +28,15 @@ export const Host = ({page}) => {
     e.stopPropagation();
         if(window.confirm('Are you sure you want to delete this site?')) {
           setloading(true)
-          await DELETE(`/host/delete/${currentValues?.id}`).then(res => {
+          await DELETE(`${HOSTINGS_DELETE_URL}/${currentValues?.id}`).then(res => {
             if(res.status){
-              message({type:"info", msg:"Deletion successful", title:"Success"})
-              dispatch(setCurrentValues({}))
+              toast.success('Success!', { position: toast.POSITION.TOP_RIGHT, autoClose: 4000 })
               dispatch(setCurrentCardData({}))
               redirectCard()
             }
-          }).catch(err => message({type:"danger", msg: err.response.data.error, title:"Xatolik"})).finally(() => setloading(false))
+          }).catch(err => toast.error(`Error! ${err.response.data.error}`, { position: toast.POSITION.TOP_RIGHT })).finally(() => setloading(false))
         } else {
-          message({type:"danger", msg:"Error deleting! Please try again.", title:"Error"})
+          toast.error(`Error deleting! Please try again.`, { position: toast.POSITION.TOP_RIGHT })
         }
   }
     

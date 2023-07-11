@@ -1,5 +1,9 @@
 export const useAuth = () => {
-    const user = { loggedIn: true };
-    return user && user.loggedIn;
-  };
+  const auth = JSON.parse(sessionStorage.getItem("user"))
+    return auth && auth.token;
+};
   
+export const useLogOut = () => {
+  sessionStorage.removeItem("user");
+  window.location.reload()
+}

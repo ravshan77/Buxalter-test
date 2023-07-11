@@ -4,7 +4,7 @@ import "./css/style.css";
 import "./charts/ChartjsConfig";
 import Layout from "./Layout/Layout";
 import { Route, Routes } from "react-router-dom";
-import { Login, NotFoundPage } from "./pages";
+import { LoginLayout, NotFoundPage } from "./pages";
 import { useAuth } from "./hooks/useAuth";
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
   return (
     <>
       {isAuth ? <Layout /> : <Routes> 
-          <Route path="/" element={<Login />} />  
+          <Route path="/" element={<LoginLayout />} />  
           <Route path="*" element={<NotFoundPage />} />
         </Routes>}
     </>

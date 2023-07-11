@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import "./loading.css"
+import "./loading.scss"
 
 const Loading = () => {
     return (
