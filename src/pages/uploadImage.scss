@@ -1,0 +1,143 @@
+.wrap-up{
+  width: 100%;
+  height: 100%;
+  border: var(--primary) 2px solid;
+  border-radius: 4px;
+  background-color: #fff;
+  position: relative;
+}
+
+.up-image{
+  width: 100%;
+  height: 100%;
+}
+
+input[type="file"] { 
+  opacity: 0; /* make transparent */
+  z-index: -1; /* move under anything else */
+  position: absolute; /* don't let it take up space */
+}
+
+.up-input{
+  width: 100%;
+}
+
+.up-label{
+  height: 40px;
+  width: 40px;
+  background-color: var(--light-blue);
+  position: absolute;
+  bottom: 3px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  // z-index: 10;
+}
+
+.up-delete{
+  height: 40px;
+  width: 40px;
+  background-color: var(--light-blue);
+  position: absolute;
+  bottom: 3px;
+  left: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  z-index: 10;
+
+  svg{
+    fill: red;
+  }
+}
+
+.up-div{
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.up-title{
+ padding: 0;
+ margin: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.uploadImage-wrap__div {
+  position: relative;
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+
+  .ant-image {
+    width: 100%;
+    .anticon-eye {
+      display: flex;
+      align-items: center;
+      z-index: 100000;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+    }
+  }
+  .upload-image__upload {
+    border-radius: 6px !important;
+    overflow: hidden !important;
+  }
+
+  .delete__image {
+    position: absolute;
+    bottom: 0 !important;
+    right: 0 !important;
+    width: 40px;
+    height: 40px;
+    outline: none !important;
+    border: none !important;
+    background: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    &:hover {
+      svg {
+        fill: #fff !important;
+      }
+    }
+  }
+}
+
+.ant-image-mask {
+  width: 30px;
+  height: 30px;
+  background-color: red;
+}

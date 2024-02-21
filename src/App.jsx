@@ -1,31 +1,15 @@
-import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React from "react";
 import "./css/style.css";
-import "./charts/ChartjsConfig";
-import Layout from "./Layout/Layout";
-import { Route, Routes } from "react-router-dom";
-import { LoginLayout, NotFoundPage } from "./pages";
-import { useAuth } from "./hooks/useAuth";
+// import Layout from "./Layout/Layout";
+import PrintLayout from "./pages";
 
 function App() {
-  const location = useLocation();
-  const isAuth = useAuth()
-  
-  useEffect(() => {
-    document.querySelector("html").style.scrollBehavior = "auto";
-    window.scroll({ top: 0 });
-    document.querySelector("html").style.scrollBehavior = "";
-  }, [location.pathname]); // triggered on route change
 
 
-
-  return (
-    <>
-      {isAuth ? <Layout /> : <Routes> 
-          <Route path="/" element={<LoginLayout />} />  
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>}
-    </>
+  return (<>
+      {/* <Layout /> */}
+      <PrintLayout />
+  </>
   );
 }
 
